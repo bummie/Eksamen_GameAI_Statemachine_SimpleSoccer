@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 public class Wander : IState
 {
-    public Wander()
-    {
-        
-    }
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state Wander");

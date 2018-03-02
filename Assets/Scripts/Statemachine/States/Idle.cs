@@ -2,10 +2,6 @@ using System.Collections;
 using UnityEngine;
 public class Idle : IState
 {
-    public Idle()
-    {
-        
-    }
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state Idle");
@@ -15,7 +11,9 @@ public class Idle : IState
         Debug.Log("Updating Idle");
         if(player.transform.position.y > 2f)
         {
-            player.GetComponent<StateMachine>().ChangeState( player.GetComponent<StateMachine>().States["Wander"]);
+            StateMachine stateMachine = player.GetComponent<StateMachine>();
+            
+            stateMachine.ChangeState(stateMachine.States["Wander"]);
         }
     }
     public void ExitState(GameObject player)

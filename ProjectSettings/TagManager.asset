@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - GameStates
+  - Ball
   layers:
   - Default
   - TransparentFX
