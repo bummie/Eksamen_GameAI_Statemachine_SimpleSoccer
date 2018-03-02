@@ -8,12 +8,17 @@ public class Idle : IState
     }
     public void UpdateState(GameObject player)
     {
-        Debug.Log("Updating Idle");
-        if(player.transform.position.y > 2f)
+
+        // Transition into wanderingmode
+        if(GameObject.ReferenceEquals(player.GetComponent<BallController>().Ball.GetComponent<Ball>().CurrentHolder, player))
         {
             StateMachine stateMachine = player.GetComponent<StateMachine>();
-            
+
             stateMachine.ChangeState(stateMachine.States["Wander"]);
+        }else
+        {
+            player.GetComponent<PlayerMove>().TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+            player.GetComponent<PlayerMove>().ShouldMove = true;
         }
     }
     public void ExitState(GameObject player)
