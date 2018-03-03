@@ -12,7 +12,7 @@ public class ChaseBall : IState
     {   
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
 
-		// If we caught the ball, transition!
+		// We caught the ball!
         if(GameObject.ReferenceEquals(currentHolder, player))
         {
             StateMachine stateMachine = player.GetComponent<StateMachine>();
@@ -21,7 +21,7 @@ public class ChaseBall : IState
             return;
         }
 
-        // Dont chase if a teammate has the ball
+        // Stop chasing if a teammate has the ball
         if( currentHolder.GetComponent<PlayerInfo>().Team == player.GetComponent<PlayerInfo>().Team)
         {
             StateMachine stateMachine = player.GetComponent<StateMachine>();

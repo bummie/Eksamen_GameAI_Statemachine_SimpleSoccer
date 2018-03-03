@@ -16,6 +16,6 @@ public class PlayerInfo : MonoBehaviour
 		gameObject.GetComponent<Cosmetics>().ChangeShirtColor((int)Team);	
 	}
 
-	
+	//TODO: Get array of closest players except oneself
 
 }
