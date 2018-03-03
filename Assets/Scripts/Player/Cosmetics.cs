@@ -5,13 +5,16 @@ using UnityEngine;
 public class Cosmetics : MonoBehaviour 
 {
 
+	#region Material Parameters
 	public Material[] HairColors;
 	public Material[] SkinTone;
+	public Material[] Shirts;
 
 	public GameObject Head;
 	public GameObject Body;
 	public GameObject Hair;
-
+	public GameObject Shirt;
+	#endregion
 	void Start () 
 	{
 		Hair.GetComponent<Renderer>().material = HairColors[Random.Range(0, HairColors.Length)];
@@ -20,9 +23,9 @@ public class Cosmetics : MonoBehaviour
 		Head.GetComponent<Renderer>().material = skinTone;
 		Body.GetComponent<Renderer>().material = skinTone;
 	}
-	
-	void Update () 
+
+	public void ChangeShirtColor(int shirtIndex)
 	{
-		
+		Shirt.GetComponent<Renderer>().material = Shirts[shirtIndex];
 	}
 }

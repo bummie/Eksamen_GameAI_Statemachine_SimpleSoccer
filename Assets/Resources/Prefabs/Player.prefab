@@ -643,9 +643,13 @@ MonoBehaviour:
   - {fileID: 2100000, guid: 682f6abd08a9ee44781c9adfc39eb97f, type: 2}
   - {fileID: 2100000, guid: c1b514723affd2243a9d5148f4025831, type: 2}
   - {fileID: 2100000, guid: 37501cab7a624b04abcada9e47b4efc5, type: 2}
+  Shirts:
+  - {fileID: 2100000, guid: 7f456a77a6f15ad47811beeb1e29fc94, type: 2}
+  - {fileID: 2100000, guid: 9dab7fe773596d745bc97ad1bd1e260b, type: 2}
   Head: {fileID: 1950479312746860}
   Body: {fileID: 1965528123804404}
   Hair: {fileID: 1604575797287610}
+  Shirt: {fileID: 1412361196224366}
 --- !u!114 &114878385986747800
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -658,6 +662,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Ball: {fileID: 0}
+  BallComponent: {fileID: 0}
   Feet: {fileID: 1487550452075054}
 --- !u!135 &135930352662277450
 SphereCollider:

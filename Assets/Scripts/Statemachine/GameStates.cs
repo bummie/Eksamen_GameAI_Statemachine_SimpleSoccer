@@ -10,8 +10,15 @@ public class GameStates : MonoBehaviour {
 	{
 		States = new Dictionary<string, IState>();
 		
+	#region States
+
 		States.Add("Idle", new Idle());
-		States.Add("Wander", new Wander());
+		States.Add("ChaseBall", new ChaseBall());
 		States.Add("PassBall", new PassBall());
+		States.Add("MoveGoodSpot", new MoveGoodSpot());
+		States.Add("Dribble", new Dribble());
+		States.Add("ShootGoal", new ShootGoal());
+		
+	#endregion
 	}
 }

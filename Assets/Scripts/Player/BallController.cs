@@ -43,4 +43,9 @@ public class BallController : MonoBehaviour {
 			Ball.GetComponent<Ball>().PickupBall(gameObject);
 		}
 	}
+
+	public GameObject CurrentBallHolder()
+	{
+		return BallComponent.CurrentHolder;
+	}
 }

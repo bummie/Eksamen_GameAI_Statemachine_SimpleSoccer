@@ -5,20 +5,19 @@ public class Idle : IState
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state Idle");
+        player.GetComponent<PlayerMove>().ShouldMove = false;
     }
     public void UpdateState(GameObject player)
     {
+        // Check if current holder of ball is on same team 
+        GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
 
-        // Transition into wanderingmode
-        if(GameObject.ReferenceEquals(player.GetComponent<BallController>().Ball.GetComponent<Ball>().CurrentHolder, player))
+        if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != player.GetComponent<PlayerInfo>().Team)
         {
             StateMachine stateMachine = player.GetComponent<StateMachine>();
 
-            stateMachine.ChangeState(stateMachine.States["Wander"]);
-        }else
-        {
-            player.GetComponent<PlayerMove>().TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
-            player.GetComponent<PlayerMove>().ShouldMove = true;
+            stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
+            return;
         }
     }
     public void ExitState(GameObject player)
