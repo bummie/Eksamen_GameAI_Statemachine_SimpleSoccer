@@ -5,8 +5,9 @@ public class Wander : IState
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state Wander");
-        player.GetComponent<PlayerMove>().TargetPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 5));
-        player.GetComponent<PlayerMove>().ShouldMove = true;
+        //player.GetComponent<PlayerMove>().TargetPosition = new Vector3(Random.Range(0, 10), 0, Random.Range(0, 5));
+        //player.GetComponent<PlayerMove>().ShouldMove = true;
+        player.GetComponent<BallController>().KickBall(10f);
 
     }
     public void UpdateState(GameObject player)

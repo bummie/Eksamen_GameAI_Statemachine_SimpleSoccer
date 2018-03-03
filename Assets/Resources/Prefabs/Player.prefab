@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 114413308428132034}
   - component: {fileID: 114878385986747800}
   - component: {fileID: 114769311139745970}
+  - component: {fileID: 114507444718439590}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -108,7 +109,7 @@ GameObject:
   m_Layer: 0
   m_Name: Feet
   m_TagString: Untagged
-  m_Icon: {fileID: -1412012063857583412, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -608,6 +609,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e7d45762dbcb854da3c2eb3d9c16314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114507444718439590
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1055630828411052}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 973f7dad8c9f3c5489eaa60b21b646ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Team: 0
+  Position: 1
 --- !u!114 &114769311139745970
 MonoBehaviour:
   m_ObjectHideFlags: 1

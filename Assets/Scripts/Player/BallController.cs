@@ -5,16 +5,32 @@ using UnityEngine;
 public class BallController : MonoBehaviour {
 
 	public GameObject Ball;
+	public Ball BallComponent;
 	public GameObject Feet;
 	void Start () 
 	{
-		
+		BallComponent = Ball.GetComponent<Ball>();
 	}
 	
 	void Update () 
 	{
 		
 	}
+
+	/// <summary>
+	/// Kicks the ball with given force
+	/// </summary>
+	/// <param name="kickForce"></param>
+	public void KickBall(float kickForce)
+	{
+		// Check if player has the ball
+		if(GameObject.ReferenceEquals(BallComponent.CurrentHolder, gameObject))
+		{
+			BallComponent.DropBall();
+			Ball.GetComponent<Rigidbody>().AddForce(transform.forward * kickForce, ForceMode.Impulse);
+		}
+	}
+
 	/// <summary>
 	/// OnCollisionEnter is called when this collider/rigidbody has begun
 	/// touching another rigidbody/collider.

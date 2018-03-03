@@ -11,7 +11,21 @@ public class PlayerMove : MonoBehaviour
 	public float RotationForce { get; private set; }
 	public float Stamina { get; private set; }
 	public float MaxStamina { get; private set; }
-	public bool ShouldMove { get; set; }
+	
+	private bool _shouldMove = false;
+	public bool ShouldMove 
+	{ 
+		get{ return _shouldMove; } 
+		set
+		{ 
+			_shouldMove = value; 
+			if(_body != null && !_shouldMove)
+			{
+				_body.velocity = Vector3.zero;
+				_body.angularVelocity = Vector3.zero;
+			}
+		 }
+	}
 
 	#endregion
 
@@ -28,7 +42,6 @@ public class PlayerMove : MonoBehaviour
 		Stamina = MaxStamina;
 
 		TargetPosition = transform.position;
-		ShouldMove = false;
 
 		_body = GetComponent<Rigidbody>();
 		_ball = GameObject.FindGameObjectWithTag("Ball");

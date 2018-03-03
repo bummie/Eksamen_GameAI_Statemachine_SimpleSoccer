@@ -11,11 +11,6 @@ public class Ball : MonoBehaviour
 	{
 		_oldParent = transform.parent;
 	}
-	
-	void Update ()
-	{
-		
-	}
 
 	/// <summary>
 	/// Sets the "carrier" of the ball to the given player
@@ -33,5 +28,6 @@ public class Ball : MonoBehaviour
 	{
 		CurrentHolder = null;
 		transform.GetComponent<Rigidbody>().isKinematic = false;
+		transform.parent = _oldParent;
 	}
 }

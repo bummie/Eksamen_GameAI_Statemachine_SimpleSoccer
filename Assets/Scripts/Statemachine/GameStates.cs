@@ -12,5 +12,6 @@ public class GameStates : MonoBehaviour {
 		
 		States.Add("Idle", new Idle());
 		States.Add("Wander", new Wander());
+		States.Add("PassBall", new PassBall());
 	}
 }
