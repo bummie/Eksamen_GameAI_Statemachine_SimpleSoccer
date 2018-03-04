@@ -9,15 +9,18 @@ public class Idle : IState
     }
     public void UpdateState(GameObject player)
     {
-        // Check if current holder of ball is on same team 
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
-
+       
+        // If the oposite team has the ball or the ball is free
         if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != player.GetComponent<PlayerInfo>().Team)
         {
             StateMachine stateMachine = player.GetComponent<StateMachine>();
 
-            stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
-            return;
+            if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
+            {
+                stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
+                return;
+            }
         }
     }
     public void ExitState(GameObject player)
