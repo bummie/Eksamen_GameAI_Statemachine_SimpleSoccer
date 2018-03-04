@@ -10,17 +10,22 @@ public class Idle : IState
     public void UpdateState(GameObject player)
     {
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
-       
+        StateMachine stateMachine = player.GetComponent<StateMachine>();
+
         // If the oposite team has the ball or the ball is free
         if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != player.GetComponent<PlayerInfo>().Team)
         {
-            StateMachine stateMachine = player.GetComponent<StateMachine>();
 
             if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
             {
                 stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
                 return;
             }
+        } // Player has received the ball
+        else if(GameObject.ReferenceEquals(currentHolder, player))
+        {
+            stateMachine.ChangeState(stateMachine.States["PassBall"]);
+            return;
         }
     }
     public void ExitState(GameObject player)

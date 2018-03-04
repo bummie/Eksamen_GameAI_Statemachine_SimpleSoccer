@@ -11,23 +11,25 @@ public class ChaseBall : IState
     public void UpdateState(GameObject player)
     {   
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
-
-		// We caught the ball!
-        if(GameObject.ReferenceEquals(currentHolder, player))
+        if(currentHolder != null)
         {
-            StateMachine stateMachine = player.GetComponent<StateMachine>();
+            // We caught the ball!
+            if(GameObject.ReferenceEquals(currentHolder, player))
+            {
+                StateMachine stateMachine = player.GetComponent<StateMachine>();
 
-            stateMachine.ChangeState(stateMachine.States["Idle"]);
-            return;
-        }
+                stateMachine.ChangeState(stateMachine.States["Idle"]);
+                return;
+            }
 
-        // Stop chasing if a teammate has the ball
-        if( currentHolder.GetComponent<PlayerInfo>().Team == player.GetComponent<PlayerInfo>().Team)
-        {
-            StateMachine stateMachine = player.GetComponent<StateMachine>();
+            // Stop chasing if a teammate has the ball
+            if( currentHolder.GetComponent<PlayerInfo>().Team == player.GetComponent<PlayerInfo>().Team)
+            {
+                StateMachine stateMachine = player.GetComponent<StateMachine>();
 
-            stateMachine.ChangeState(stateMachine.States["Idle"]);
-            return;
+                stateMachine.ChangeState(stateMachine.States["Idle"]);
+                return;
+            }
         }
 
         // Chase the ball!

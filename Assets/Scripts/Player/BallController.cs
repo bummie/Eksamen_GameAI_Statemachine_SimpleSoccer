@@ -5,7 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour {
 
 	public GameObject Ball;
-	public Ball BallComponent;
+	public Ball BallComponent { get; private set; }
 	public GameObject Feet;
 	void Start () 
 	{
