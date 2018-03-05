@@ -73,10 +73,20 @@ public class PlayerMove : MonoBehaviour
 	/// Rotates towards given direction
 	/// </summary>
 	/// <param name="direction"></param>
-	public void RotateTowardsDirection(Vector3 direction)
+	private void RotateTowardsDirection(Vector3 direction)
 	{
 		direction.y = 0f; // So we're only rotating around the y axis
         Vector3 newDir = Vector3.RotateTowards(transform.forward, direction, RotationForce * Time.deltaTime, 0.0f);
         transform.rotation = Quaternion.LookRotation(newDir);
+	}
+
+	/// <summary>
+	/// Snaps towards given direction
+	/// </summary>
+	/// <param name="direction"></param>
+	public void SnapToDirection(Vector3 direction)
+	{
+		direction.y = 0f; // So we're only rotating around the y axis
+        transform.rotation = Quaternion.LookRotation(direction);
 	}
 }

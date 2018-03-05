@@ -19,10 +19,12 @@ public class PassBall : IState
 		{
 			if(GameObject.ReferenceEquals(teamPlayer, player)) {continue;} // Dont include self
 
+			// Debug ray
 			Vector3 direction = (teamPlayer.transform.position - player.transform.position).normalized;
-			player.GetComponent<PlayerMove>().RotateTowardsDirection(direction);
+			player.GetComponent<PlayerMove>().SnapToDirection(direction);
 			
-			//Debug.DrawRay(player.transform.position + player.transform.forward, player.transform.forward * 50, Color.blue, .5f);
+			Color rayColor = player.GetComponent<PlayerInfo>().Team == StaticData.SoccerTeam.BLUE ? Color.blue : Color.red;
+			Debug.DrawRay(player.transform.position + player.transform.forward, player.transform.forward * 50, rayColor, .5f);
 
 			if (Physics.Raycast(player.transform.position + player.transform.forward, player.transform.forward, out hit, 50.0f))
 			{

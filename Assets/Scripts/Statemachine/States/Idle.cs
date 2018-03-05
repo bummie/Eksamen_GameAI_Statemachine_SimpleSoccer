@@ -15,7 +15,6 @@ public class Idle : IState
         // If the oposite team has the ball or the ball is free
         if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != player.GetComponent<PlayerInfo>().Team)
         {
-
             if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
             {
                 stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
