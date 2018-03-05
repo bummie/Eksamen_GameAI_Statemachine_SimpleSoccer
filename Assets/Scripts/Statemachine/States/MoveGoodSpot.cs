@@ -47,7 +47,7 @@ public class MoveGoodSpot : IState
         }
 
         // We have found our position!
-        if(Vector3.Distance(player.transform.position, player.GetComponent<PlayerMove>().TargetPosition) < 2f)
+        if(Vector3.Distance(player.transform.position, player.GetComponent<PlayerMove>().TargetPosition) < 3f)
         {
             stateMachine.ChangeState(stateMachine.States["Idle"]);
             return;
