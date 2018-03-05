@@ -2,6 +2,11 @@
 using UnityEngine;
 public class ChaseBall : IState
 {
+    public string GetStateName()
+    {
+        return "ChaseBall";
+    }
+
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state ChaseBall");

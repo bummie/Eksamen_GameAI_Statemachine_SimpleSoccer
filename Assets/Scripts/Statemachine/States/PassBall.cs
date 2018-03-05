@@ -2,6 +2,11 @@
 
 public class PassBall : IState
 {
+	public string GetStateName()
+    {
+        return "PassBall";
+    }
+
    	public void EnterState(GameObject player)
     {
       	player.GetComponent<PlayerMove>().ShouldMove = false;

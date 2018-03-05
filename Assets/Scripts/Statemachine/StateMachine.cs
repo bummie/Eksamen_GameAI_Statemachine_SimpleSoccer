@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class StateMachine : MonoBehaviour 
 {
+	public Text StateText;
 	private IState _currentState;
 	public Dictionary<string, IState> States { get; set; }
 	void Start ()
@@ -37,5 +39,7 @@ public class StateMachine : MonoBehaviour
 		_currentState.ExitState(gameObject);
 		_currentState = newState;
 		_currentState.EnterState(gameObject);
+
+		StateText.text = _currentState.GetStateName();
 	}
 }

@@ -5,6 +5,13 @@ public interface IState
 {
 
     /// <summary>
+    /// Returns the name of the state
+    /// Used for debugging
+    /// </summary>
+    /// <returns></returns>
+    string GetStateName();
+    
+    /// <summary>
     /// Runs once the state has changed to
     /// </summary>
     /// <param name="player"></param>

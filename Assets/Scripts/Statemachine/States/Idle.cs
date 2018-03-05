@@ -2,6 +2,12 @@ using System.Collections;
 using UnityEngine;
 public class Idle : IState
 {
+
+   public string GetStateName()
+    {
+        return "Idle";
+    }
+
     public void EnterState(GameObject player)
     {
         Debug.Log("Entering state Idle");
@@ -26,6 +32,8 @@ public class Idle : IState
             stateMachine.ChangeState(stateMachine.States["PassBall"]);
             return;
         }
+
+        stateMachine.ChangeState(stateMachine.States["MoveGoodSpot"]);
     }
     public void ExitState(GameObject player)
     {

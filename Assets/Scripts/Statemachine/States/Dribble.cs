@@ -2,6 +2,11 @@
 using UnityEngine;
 public class Dribble : IState
 {
+    public string GetStateName()
+    {
+        return "Dribble";
+    }
+
     public void EnterState(GameObject player)
     {
       

@@ -2,6 +2,12 @@
 using UnityEngine;
 public class ShootGoal : IState
 {
+
+    public string GetStateName()
+    {
+        return "ShootGoal";
+    }
+
     public void EnterState(GameObject player)
     {
 

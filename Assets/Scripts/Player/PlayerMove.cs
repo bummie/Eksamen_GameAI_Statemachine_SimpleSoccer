@@ -64,7 +64,7 @@ public class PlayerMove : MonoBehaviour
 		}
 		
 		Vector3 direction = (TargetPosition - transform.position).normalized;
-		_body.AddForce(direction * MoveForce, ForceMode.Impulse);
+		_body.velocity = direction * MoveForce; //_body.AddForce(direction * MoveForce, ForceMode.Impulse);
 
 		RotateTowardsDirection(direction);
 	}
