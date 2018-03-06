@@ -22,6 +22,9 @@ public class Cosmetics : MonoBehaviour
 		Material skinTone =  SkinTone[Random.Range(0, SkinTone.Length)];
 		Head.GetComponent<Renderer>().material = skinTone;
 		Body.GetComponent<Renderer>().material = skinTone;
+
+		//For Audience
+		ChangeShirtColor(Random.Range(0, 2));
 	}
 
 	public void ChangeShirtColor(int shirtIndex)
