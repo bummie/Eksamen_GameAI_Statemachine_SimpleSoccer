@@ -6,12 +6,13 @@ using UnityEngine.UI;
 public class StateMachine : MonoBehaviour 
 {
 	public Text StateText;
+	public string StartingState = "Idle";
 	private IState _currentState;
 	public Dictionary<string, IState> States { get; set; }
 	void Start ()
 	{
 		States = GameObject.FindGameObjectWithTag("GameStates").GetComponent<GameStates>().States;
-		ChangeState(States["Idle"]);
+		ChangeState(States[StartingState]);
 	}
 	
 	// Update is called once per frame

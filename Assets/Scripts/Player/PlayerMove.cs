@@ -211,12 +211,10 @@ public class PlayerMove : MonoBehaviour
 		{
 			if(other.transform.GetComponent<PlayerInfo>().Team != GetComponent<PlayerInfo>().Team)
 			{
-				Debug.Log("Nudge!");
 				other.transform.GetComponent<PlayerMove>().MovementTimeout();
 				
 				Vector3 direction = (other.transform.position - transform.position).normalized;
 				other.transform.GetComponent<Rigidbody>().AddForce(direction * MuscleForce , ForceMode.Impulse);
-				//other.transform.GetComponent<BallController>().BallComponent.DropBall();
 			}
 		}
 	}

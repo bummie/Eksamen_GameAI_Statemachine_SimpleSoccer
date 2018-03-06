@@ -13,7 +13,10 @@ public class PlayerInfo : MonoBehaviour
 	void Start()
 	{
 		_teamObject = transform.parent.gameObject;
-		gameObject.GetComponent<Cosmetics>().ChangeShirtColor((int)Team);	
 		TeamInfo = _teamObject.GetComponent<Team>();
+
+		// Change to correct shirtcolor
+		int shirtIndex = Position == StaticData.FieldPosition.GOALKEEPER ? ((int)Team)+2 : (int)Team; 
+		gameObject.GetComponent<Cosmetics>().ChangeShirtColor(shirtIndex);	
 	}
 }
