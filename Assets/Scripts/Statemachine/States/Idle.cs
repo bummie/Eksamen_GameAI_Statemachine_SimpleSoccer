@@ -31,7 +31,7 @@ public class Idle : IState
         } // Player has received the ball
         else if(GameObject.ReferenceEquals(currentHolder, player))
         {
-            stateMachine.ChangeState(stateMachine.States["PassBall"]);
+            stateMachine.RandomState();
             return;
         }
 

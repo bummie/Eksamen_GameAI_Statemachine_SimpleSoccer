@@ -6,16 +6,14 @@ public class PlayerInfo : MonoBehaviour
 	public StaticData.SoccerTeam Team = StaticData.SoccerTeam.BLUE;
 	public StaticData.FieldPosition Position = StaticData.FieldPosition.DEFENSE;
 
-	public GameObject TeamObject;
+	private GameObject _teamObject;
 
 	public Team TeamInfo { get; set; }
 
 	void Start()
 	{
+		_teamObject = transform.parent.gameObject;
 		gameObject.GetComponent<Cosmetics>().ChangeShirtColor((int)Team);	
-		TeamInfo = TeamObject.GetComponent<Team>();
+		TeamInfo = _teamObject.GetComponent<Team>();
 	}
-
-	//TODO: Get array of closest players except oneself
-
 }

@@ -42,4 +42,47 @@ public class StateMachine : MonoBehaviour
 
 		StateText.text = _currentState.GetStateName();
 	}
+
+	/// <summary>
+	/// Changes to a random state based on possibillity for differnt field positions
+	/// </summary>
+	public void RandomState()
+	{	
+		int possibility = Random.Range(0, 100);
+			
+		switch(GetComponent<PlayerInfo>().Position)
+		{
+			case StaticData.FieldPosition.OFFENSE:
+				if(possibility > 0 && possibility < 40)
+				{
+					ChangeState(States["ShootGoal"]);
+				}
+				else if(possibility > 40 && possibility < 80)
+				{
+					ChangeState(States["Idle"]); //TODO: Change to dribble
+				}else
+				{
+					ChangeState(States["PassBall"]);
+				}
+			break;
+
+			case StaticData.FieldPosition.DEFENSE:
+				if(possibility > 0 && possibility < 60)
+				{
+					ChangeState(States["PassBall"]);
+				}
+				else if(possibility > 60 && possibility < 90)
+				{
+					ChangeState(States["Idle"]); //TODO: Change to dribble
+				}else
+				{
+					ChangeState(States["ShootGoal"]);
+				}
+			break;
+
+			case StaticData.FieldPosition.GOALKEEPER:
+				//TODO: Add for keeper
+			break;
+		}
+	}
 }

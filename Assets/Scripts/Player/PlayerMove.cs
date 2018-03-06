@@ -40,7 +40,7 @@ public class PlayerMove : MonoBehaviour
 
 	void Start ()
 	{
-		MoveForce = 10f;
+		MoveForce = 5f;
 		RotationForce = 10f;
 		MaxVelocity = 3f;
 		MaxStamina = 100f;
