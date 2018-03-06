@@ -30,15 +30,21 @@ public class MoveGoodSpot : IState
     {
         StateMachine stateMachine = player.GetComponent<StateMachine>();
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
-        if(currentHolder != null)
-        {
-            // We caught the ball!
-            if(GameObject.ReferenceEquals(currentHolder, player))
-            {
+        PlayerInfo plyInfo = player.GetComponent<PlayerInfo>();
 
-                stateMachine.ChangeState(stateMachine.States["Idle"]);
+         // If the oposite team has the ball or the ball is free
+        if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != plyInfo.Team)
+        {
+            if(plyInfo.TeamInfo.IsPlayerClosestToBall(player))
+            {
+                stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
                 return;
             }
+        } // Player has received the ball
+        else if(GameObject.ReferenceEquals(currentHolder, player))
+        {
+            stateMachine.RandomState();
+            return;
         }
 
         // We have found our position!

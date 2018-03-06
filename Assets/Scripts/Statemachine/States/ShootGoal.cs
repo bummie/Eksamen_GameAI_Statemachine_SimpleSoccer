@@ -16,7 +16,10 @@ public class ShootGoal : IState
 
         Vector3 shootDirection = ballController.OpponentsGoal.GetComponent<Goal>().RandomPointBetweenPosts() - player.transform.position;
         plyMove.SnapToDirection(shootDirection);
-        ballController.KickBall(12f, Random.Range(0f, 15f));
+
+        float kickForce = Random.Range(7f, 16f);
+        float angle = Random.Range(0f, 15f);
+        ballController.KickBall(kickForce, angle);
 
         stateMachine.ChangeState(stateMachine.States["Idle"]);
         return;

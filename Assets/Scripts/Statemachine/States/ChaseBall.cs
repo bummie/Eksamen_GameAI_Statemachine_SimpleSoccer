@@ -18,6 +18,7 @@ public class ChaseBall : IState
     {   
         StateMachine stateMachine = player.GetComponent<StateMachine>();
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();
 
         if(currentHolder != null)
         {
@@ -39,7 +40,8 @@ public class ChaseBall : IState
         // Chase the ball if closest, if not move to good spot!
         if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
         {
-            player.GetComponent<PlayerMove>().TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+            plyMove.TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+            plyMove.ShouldMove = true;
         }else
         {
             stateMachine.ChangeState(stateMachine.States["MoveGoodSpot"]);

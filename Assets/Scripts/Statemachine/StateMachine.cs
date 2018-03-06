@@ -59,7 +59,7 @@ public class StateMachine : MonoBehaviour
 				}
 				else if(possibility > 40 && possibility < 80)
 				{
-					ChangeState(States["Idle"]); //TODO: Change to dribble
+					ChangeState(States["Dribble"]);
 				}else
 				{
 					ChangeState(States["PassBall"]);
@@ -73,7 +73,7 @@ public class StateMachine : MonoBehaviour
 				}
 				else if(possibility > 60 && possibility < 90)
 				{
-					ChangeState(States["Idle"]); //TODO: Change to dribble
+					ChangeState(States["Dribble"]);
 				}else
 				{
 					ChangeState(States["ShootGoal"]);

@@ -7,6 +7,7 @@ public class PlayerMove : MonoBehaviour
 	#region Player Parameters
 
 	public float MoveForce { get; private set; }
+	public float MuscleForce { get; private set; }
 	public float MaxVelocity {get; private set; }
 	public float RotationForce { get; private set; }
 	public float Stamina { get; private set; }
@@ -18,11 +19,14 @@ public class PlayerMove : MonoBehaviour
 		get{ return _shouldMove; } 
 		set
 		{ 
-			_shouldMove = value; 
-			if(_body != null && !_shouldMove)
+			if(!_hasTimeOut)
 			{
-				_body.velocity = Vector3.zero;
-				_body.angularVelocity = Vector3.zero;
+				_shouldMove = value; 
+				if(_body != null && !_shouldMove)
+				{
+					_body.velocity = Vector3.zero;
+					_body.angularVelocity = Vector3.zero;
+				}
 			}
 		 }
 	}
@@ -38,13 +42,21 @@ public class PlayerMove : MonoBehaviour
 	private GameObject _ball;
 	private Rigidbody _body;
 
+	//Timer
+	private bool _hasTimeOut = false;
+	private float _timeOutTime = 0.2f;
+	private float _timeOutTimeLeft;
+
 	void Start ()
 	{
-		MoveForce = 5f;
+		MoveForce = Random.Range(4f, 7f);
+		MuscleForce = Random.Range(50f, 250f);
 		RotationForce = 10f;
 		MaxVelocity = 3f;
 		MaxStamina = 100f;
 		Stamina = MaxStamina;
+
+		_timeOutTimeLeft = _timeOutTime;
 
 		TargetPosition = transform.position;
 
@@ -64,6 +76,20 @@ public class PlayerMove : MonoBehaviour
 			// Keep an eye at the ball
 			RotateTowardsDirection(_ball.transform.position - transform.position);
 		}
+
+		if(_hasTimeOut)
+		{
+			Debug.Log("Timeleft: " + _timeOutTimeLeft);
+
+			_timeOutTimeLeft -= Time.deltaTime;
+			if(_timeOutTimeLeft < 0)
+			{
+				_hasTimeOut = false;
+				ShouldMove = true;
+				_timeOutTimeLeft = _timeOutTime;
+			}
+		}
+		
 	}
 	
 	/// <summary>
@@ -159,6 +185,38 @@ public class PlayerMove : MonoBehaviour
 				{
 					return false;
 				}
+			}
+		}
+	}
+	
+	/// <summary>
+	/// Hinders the given player from moving for a given time
+	/// This because we move the players by changing their velocity
+	/// rather than adding impulses. So we time them out so we can 
+	/// apply nudging force to them.
+	/// </summary>
+	public void MovementTimeout()
+	{
+		_hasTimeOut = true;
+		_shouldMove = false;
+	}
+
+	/// <summary>
+	/// If two players from opposite teams meet, they push with their musclestrength 
+	/// </summary>
+	/// <param name="other"></param>
+	void OnCollisionEnter(Collision other)
+	{
+		if(other.transform.tag == "Player")
+		{
+			if(other.transform.GetComponent<PlayerInfo>().Team != GetComponent<PlayerInfo>().Team)
+			{
+				Debug.Log("Nudge!");
+				other.transform.GetComponent<PlayerMove>().MovementTimeout();
+				
+				Vector3 direction = (other.transform.position - transform.position).normalized;
+				other.transform.GetComponent<Rigidbody>().AddForce(direction * MuscleForce , ForceMode.Impulse);
+				//other.transform.GetComponent<BallController>().BallComponent.DropBall();
 			}
 		}
 	}

@@ -10,7 +10,6 @@ public class Idle : IState
 
     public void EnterState(GameObject player)
     {
-        Debug.Log("Entering state Idle");
         player.GetComponent<PlayerMove>().ShouldMove = false;
     }
     public void UpdateState(GameObject player)
@@ -43,6 +42,5 @@ public class Idle : IState
     }
     public void ExitState(GameObject player)
     {
-        Debug.Log("Exiting Idle");
     }
 }
