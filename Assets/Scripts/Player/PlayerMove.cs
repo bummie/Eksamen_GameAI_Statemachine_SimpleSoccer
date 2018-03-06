@@ -29,6 +29,11 @@ public class PlayerMove : MonoBehaviour
 
 	#endregion
 
+	// Field limit for good positionmovement
+	public float TopLimit { get; set; }
+	public float BottomLimit { get; set; }
+	public float SideLimit { get; set; }
+
 	public Vector3 TargetPosition {	get; set;}
 	private GameObject _ball;
 	private Rigidbody _body;
@@ -43,6 +48,10 @@ public class PlayerMove : MonoBehaviour
 
 		TargetPosition = transform.position;
 
+		TopLimit = 3.7f;
+        BottomLimit = 12.5f;
+        SideLimit = 6f;
+
 		_body = GetComponent<Rigidbody>();
 		_ball = GameObject.FindGameObjectWithTag("Ball");
 	}
@@ -50,6 +59,11 @@ public class PlayerMove : MonoBehaviour
 	void Update () 
 	{
 		if(ShouldMove){ MoveToPosition(); }
+		else
+		{
+			// Keep an eye at the ball
+			RotateTowardsDirection(_ball.transform.position - transform.position);
+		}
 	}
 	
 	/// <summary>
@@ -88,5 +102,64 @@ public class PlayerMove : MonoBehaviour
 	{
 		direction.y = 0f; // So we're only rotating around the y axis
         transform.rotation = Quaternion.LookRotation(direction);
+	}
+
+	/// <summary>
+	/// Returns true if the gven player has a good position with respect to the players role.
+	/// </summary>
+	/// <returns></returns>
+	public bool HasGoodPosition()
+	{
+		// Player is to far out on the side
+		if(transform.position.z > SideLimit || transform.position.z < -SideLimit ) 
+		{
+			return false;
+		}
+
+		PlayerInfo plyInfo = GetComponent<PlayerInfo>();
+		//TODO: Write this part in a clever way
+		if(plyInfo.Team == StaticData.SoccerTeam.BLUE)
+		{
+			if(plyInfo.Position == StaticData.FieldPosition.DEFENSE)
+			{
+				if(transform.position.x > -BottomLimit && transform.position.x < -TopLimit )
+				{
+					return true;
+				}else
+				{
+					return false;
+				}
+			}else // Offense
+			{
+				if(transform.position.x < BottomLimit && transform.position.x > TopLimit )
+				{
+					return true;
+				}else
+				{
+					return false;
+				}
+			}
+		}else // Red team
+		{
+			if(plyInfo.Position == StaticData.FieldPosition.OFFENSE)
+			{
+				if(transform.position.x > -BottomLimit && transform.position.x < -TopLimit )
+				{
+					return true;
+				}else
+				{
+					return false;
+				}
+			}else // Defense
+			{
+				if(transform.position.x < BottomLimit && transform.position.x > TopLimit )
+				{
+					return true;
+				}else
+				{
+					return false;
+				}
+			}
+		}
 	}
 }

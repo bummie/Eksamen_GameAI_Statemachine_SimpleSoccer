@@ -9,15 +9,10 @@ public class MoveGoodSpot : IState
 
     public void EnterState(GameObject player)
     {
-        // Borders to stay within
-        // TODO: Change to gameobjectpositions
-        float topLimit = 3.7f;
-        float bottomLimit = 12.5f;
-        float sideLimit = 6f;
-
-        Vector3 newPosition = new Vector3(Random.Range(topLimit, bottomLimit), 0, Random.Range(-sideLimit, sideLimit) );
         PlayerInfo plyInfo = player.GetComponent<PlayerInfo>();
-        PlayerMove plymove = player.GetComponent<PlayerMove>();
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();       
+        
+        Vector3 newPosition = new Vector3(Random.Range(plyMove.TopLimit, plyMove.BottomLimit), 0, Random.Range(-plyMove.SideLimit, plyMove.SideLimit) );
 
         if(plyInfo.Team == StaticData.SoccerTeam.BLUE && plyInfo.Position == StaticData.FieldPosition.DEFENSE )
         {
@@ -28,8 +23,8 @@ public class MoveGoodSpot : IState
             newPosition.x *= -1;
         }
 
-        plymove.TargetPosition = newPosition;
-        plymove.ShouldMove = true;
+        plyMove.TargetPosition = newPosition;
+        plyMove.ShouldMove = true;
     }
     public void UpdateState(GameObject player)
     {

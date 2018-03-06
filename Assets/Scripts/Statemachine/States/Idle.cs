@@ -17,11 +17,13 @@ public class Idle : IState
     {
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
         StateMachine stateMachine = player.GetComponent<StateMachine>();
+        PlayerInfo plyInfo = player.GetComponent<PlayerInfo>();
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();
 
         // If the oposite team has the ball or the ball is free
-        if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != player.GetComponent<PlayerInfo>().Team)
+        if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != plyInfo.Team)
         {
-            if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
+            if(plyInfo.TeamInfo.IsPlayerClosestToBall(player))
             {
                 stateMachine.ChangeState(stateMachine.States["ChaseBall"]);
                 return;
@@ -33,7 +35,11 @@ public class Idle : IState
             return;
         }
 
-        stateMachine.ChangeState(stateMachine.States["MoveGoodSpot"]);
+        // If the player has a bad position, move to "better" spot
+        if(!plyMove.HasGoodPosition())
+        {
+            stateMachine.ChangeState(stateMachine.States["MoveGoodSpot"]);
+        }   
     }
     public void ExitState(GameObject player)
     {
