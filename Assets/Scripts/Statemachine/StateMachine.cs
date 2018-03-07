@@ -88,12 +88,12 @@ public class StateMachine : MonoBehaviour
 			break;
 
 			case StaticData.FieldPosition.GOALKEEPER:
-				if(possibility > 0 && possibility < 60)
+				if(possibility > 0 && possibility < 80)
 				{
 					ChangeState(States["PassBall"]);
 				}else
 				{
-					ChangeState(States["PassBall"]);
+					ChangeState(States["ShootGoal"]);
 				}
 			break;
 		}

@@ -19,7 +19,7 @@ public class SecureGoal : IState
         BallController ballController = player.GetComponent<BallController>();
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
       
-        // If the oposite team has the ball or the ball is free
+        // If the goal keeper receives the ball
         if(currentHolder != null)
         {
             if(GameObject.ReferenceEquals(currentHolder, player))
@@ -27,11 +27,7 @@ public class SecureGoal : IState
                 stateMachine.RandomState();
                 return;
             }
-        } // Player has received the ball
-       
-
-        Vector3 goalCenter = ballController.OwnGoal.GetComponent<Goal>().GoalCenter;
-        Vector3 direction = (ballController.Ball.transform.position - goalCenter).normalized;
+        } 
 
         // Chase ball if close
         if(Vector3.Distance(ballController.Ball.transform.position, player.transform.position) < 4f)
@@ -40,8 +36,8 @@ public class SecureGoal : IState
         }
         else
         {
-            //TODO: If receive ball, kick far out, or pass to teammate
-            plyMove.TargetPosition = goalCenter + direction * 1.2f;
+            plyMove.TargetPosition = ballController.OwnGoal.GetComponent<Goal>().PointBetweenPosts(ballController.Ball.transform.position);
+            plyMove.SnapToDirection(ballController.Ball.transform.position - player.transform.position);
         }
     }
     public void ExitState(GameObject player)
