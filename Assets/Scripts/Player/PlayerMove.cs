@@ -79,8 +79,6 @@ public class PlayerMove : MonoBehaviour
 
 		if(_hasTimeOut)
 		{
-			Debug.Log("Timeleft: " + _timeOutTimeLeft);
-
 			_timeOutTimeLeft -= Time.deltaTime;
 			if(_timeOutTimeLeft < 0)
 			{
@@ -217,5 +215,22 @@ public class PlayerMove : MonoBehaviour
 				other.transform.GetComponent<Rigidbody>().AddForce(direction * MuscleForce , ForceMode.Impulse);
 			}
 		}
+	}
+
+	/// <summary>
+	/// Moves the players to their own half of the field
+	/// </summary>
+	public void MoveToOwnSide()
+	{
+		PlayerInfo plyInfo = transform.GetComponent<PlayerInfo>();
+
+		Vector3 newPosition = new Vector3(Random.Range(TopLimit, BottomLimit), 0, Random.Range(-SideLimit, SideLimit) );
+
+        if(plyInfo.Team == StaticData.SoccerTeam.BLUE )
+        {
+            newPosition.x *= -1;
+        }
+       
+	   	TargetPosition = newPosition;
 	}
 }

@@ -5,18 +5,29 @@ using UnityEngine;
 public class Goal : MonoBehaviour 
 {
 	public GameObject GoalPostLeft, GoalPostRight;
+	public StaticData.SoccerTeam GoalTeam;
 	public Vector3 GoalCenter{get; private set;}
-
+	private MatchHandler _matchHandler;
 	private float _magicPostZPosition = 3;
 	void Start()
 	{
-		Vector3 leftPost = GoalPostLeft.transform.position;
-		leftPost.y = 0f;
-		Vector3 rightPost = GoalPostRight.transform.position;
-		rightPost.y = 0f;
-
-		GoalCenter = (leftPost + rightPost)/2f;
+		FindGoalCenter();
+		_matchHandler = GameObject.FindGameObjectWithTag("MatchHandler").GetComponent<MatchHandler>();
 	}
+
+	/// <summary>
+	/// Check if ball is inside goal
+	/// </summary>
+	/// <param name="other">The other Collider involved in this collision.</param>
+	void OnTriggerEnter(Collider other)
+	{
+		if(other.tag == "Ball")
+		{
+			Debug.Log("SCOOOOREEEE");
+			_matchHandler.GoalScored(GoalTeam);
+		}
+	}
+
 
 	/// <summary>
 	/// Retuns a random point between the goal posts
@@ -60,5 +71,18 @@ public class Goal : MonoBehaviour
 
 		return pos;
 
+	}
+
+	/// <summary>
+	/// Finds the center of the goal
+	/// </summary>
+	private void FindGoalCenter()
+	{
+		Vector3 leftPost = GoalPostLeft.transform.position;
+		leftPost.y = 0f;
+		Vector3 rightPost = GoalPostRight.transform.position;
+		rightPost.y = 0f;
+
+		GoalCenter = (leftPost + rightPost)/2f;
 	}
 }

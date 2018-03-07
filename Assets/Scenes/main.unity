@@ -4283,6 +4283,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1656890531748502, guid: dd9544211371bdd48977b6435dd69d00,
     type: 2}
   m_PrefabInternal: {fileID: 1542087649}
+--- !u!65 &659161742
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 659161739}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1333561, y: 1.9208539, z: 5.761921}
+  m_Center: {x: -17.571419, y: 1.0081459, z: -0.075348854}
 --- !u!1001 &662501936
 Prefab:
   m_ObjectHideFlags: 0
@@ -9728,6 +9740,11 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 114619997297010100, guid: dd9544211371bdd48977b6435dd69d00,
+        type: 2}
+      propertyPath: GoalTeam
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: dd9544211371bdd48977b6435dd69d00, type: 2}
   m_IsPrefabParent: 0
@@ -11811,6 +11828,18 @@ GameObject:
   m_PrefabParentObject: {fileID: 1724159778241174, guid: dd9544211371bdd48977b6435dd69d00,
     type: 2}
   m_PrefabInternal: {fileID: 1542087649}
+--- !u!65 &1950728712
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1950728709}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1.1333561, y: 1.9208539, z: 5.761921}
+  m_Center: {x: -17.571419, y: 1.0081459, z: -0.075348854}
 --- !u!1 &1952189672 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1055630828411052, guid: daebc625162d6d740a50d4da0ce59045,
