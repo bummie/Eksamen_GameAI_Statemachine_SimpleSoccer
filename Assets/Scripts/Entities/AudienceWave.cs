@@ -14,7 +14,7 @@ public class AudienceWave : MonoBehaviour {
 	
 	void Update () 
 	{
-		_pos.y = _originalY + Random.Range(0f, 1f);//(Mathf.Sin(Time.time) + _originalY);
-		transform.position = _pos;
+		//_pos.y = _originalY + Random.Range(0f, 1f);//(Mathf.Sin(Time.time) + _originalY);
+		//transform.position = _pos;
 	}
 }

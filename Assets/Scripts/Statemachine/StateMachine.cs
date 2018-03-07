@@ -6,13 +6,14 @@ using UnityEngine.UI;
 public class StateMachine : MonoBehaviour 
 {
 	public Text StateText;
-	public string StartingState = "Idle";
+	private string _startingState = "Idle";
 	private IState _currentState;
 	public Dictionary<string, IState> States { get; set; }
 	void Start ()
 	{
 		States = GameObject.FindGameObjectWithTag("GameStates").GetComponent<GameStates>().States;
-		ChangeState(States[StartingState]);
+		ChangeState(States[_startingState]);
+		UpdateStateText();
 	}
 	
 	// Update is called once per frame
@@ -41,6 +42,11 @@ public class StateMachine : MonoBehaviour
 		_currentState = newState;
 		_currentState.EnterState(gameObject);
 
+		UpdateStateText();
+	}
+
+	private void UpdateStateText()
+	{
 		StateText.text = _currentState.GetStateName();
 	}
 
@@ -82,7 +88,13 @@ public class StateMachine : MonoBehaviour
 			break;
 
 			case StaticData.FieldPosition.GOALKEEPER:
-				//TODO: Add for keeper
+				if(possibility > 0 && possibility < 60)
+				{
+					ChangeState(States["PassBall"]);
+				}else
+				{
+					ChangeState(States["PassBall"]);
+				}
 			break;
 		}
 	}

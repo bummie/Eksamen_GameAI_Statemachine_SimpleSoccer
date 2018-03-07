@@ -5,6 +5,7 @@ using UnityEngine;
 public class BallController : MonoBehaviour
 {
 	public Goal OpponentsGoal {get; private set;}
+	public Goal OwnGoal {get; private set;}
 	public GameObject Ball { get; private set; }
 	public Ball BallComponent { get; private set; }
 	public GameObject Feet;
@@ -18,9 +19,11 @@ public class BallController : MonoBehaviour
 		if(GetComponent<PlayerInfo>().Team == StaticData.SoccerTeam.BLUE)
 		{
 			OpponentsGoal = matchHandler.Goal_RED.GetComponent<Goal>();
+			OwnGoal = matchHandler.Goal_BLUE.GetComponent<Goal>();
 		}else
 		{
 			OpponentsGoal = matchHandler.Goal_BLUE.GetComponent<Goal>();
+			OwnGoal = matchHandler.Goal_RED.GetComponent<Goal>();
 		}
 	}
 

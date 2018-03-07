@@ -10,7 +10,14 @@ public class Idle : IState
 
     public void EnterState(GameObject player)
     {
+        StateMachine stateMachine = player.GetComponent<StateMachine>();
         player.GetComponent<PlayerMove>().ShouldMove = false;
+
+        // If goalkeeper, then secure the goal!
+        if(player.GetComponent<PlayerInfo>().Position == StaticData.FieldPosition.GOALKEEPER)
+        {
+            stateMachine.ChangeState(stateMachine.States["SecureGoal"]);
+        }
     }
     public void UpdateState(GameObject player)
     {

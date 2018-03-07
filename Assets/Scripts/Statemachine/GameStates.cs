@@ -18,6 +18,7 @@ public class GameStates : MonoBehaviour {
 		States.Add("MoveGoodSpot", new MoveGoodSpot());
 		States.Add("Dribble", new Dribble());
 		States.Add("ShootGoal", new ShootGoal());
+		States.Add("SecureGoal", new SecureGoal());
 		
 	#endregion
 	}

@@ -40,7 +40,8 @@ public class ChaseBall : IState
         // Chase the ball if closest, if not move to good spot!
         if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
         {
-            plyMove.TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+            Vector3 direction = (player.GetComponent<BallController>().Ball.transform.position - player.transform.position).normalized;
+            plyMove.TargetPosition = player.GetComponent<BallController>().Ball.transform.position + direction * 1.2f;
             plyMove.ShouldMove = true;
         }else
         {
@@ -50,6 +51,5 @@ public class ChaseBall : IState
     }
     public void ExitState(GameObject player)
     {
-        Debug.Log("Exiting Wander");
     }
 }
