@@ -1,13 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class MatchHandler : MonoBehaviour 
 {
 	public GameObject Goal_BLUE, Goal_RED;
+	public Text ScoreText;
 	public int PointsBlue{get; private set;}
 	public int PointsRed{get; private set;}
-
 	public GameObject[] AllPlayers{get; private set;}
 	public GameObject Ball{get; private set;}
 	void Start () 
@@ -45,6 +45,8 @@ public class MatchHandler : MonoBehaviour
 		{
 			PointsBlue++;
 		}
+
+		ScoreText.text = "BLUE " + PointsBlue + " - " + PointsRed + " RED";
 
 		ResetGame();
 	}

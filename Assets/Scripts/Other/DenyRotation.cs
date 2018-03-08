@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class DenyRotation : MonoBehaviour 
 {
-
+	/// <summary>
+	/// Denies rotation of the StateText above the players
+	/// </summary>
 	void Update ()
 	{
 		if(transform.rotation.eulerAngles != Vector3.zero)

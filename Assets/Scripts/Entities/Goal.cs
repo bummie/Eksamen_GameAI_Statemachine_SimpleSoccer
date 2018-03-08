@@ -23,7 +23,6 @@ public class Goal : MonoBehaviour
 	{
 		if(other.tag == "Ball")
 		{
-			Debug.Log("SCOOOOREEEE");
 			_matchHandler.GoalScored(GoalTeam);
 		}
 	}
