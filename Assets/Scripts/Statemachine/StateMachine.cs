@@ -7,7 +7,7 @@ public class StateMachine : MonoBehaviour
 {
 	public Text StateText;
 	private string _startingState = "Idle";
-	private IState _currentState;
+	public IState CurrentState{ get; private set;}
 	public Dictionary<string, IState> States { get; set; }
 	void Start ()
 	{
@@ -19,9 +19,9 @@ public class StateMachine : MonoBehaviour
 	// Update is called once per frame
 	void Update () 
 	{
-		if(_currentState != null)
+		if(CurrentState != null)
 		{
-			_currentState.UpdateState(gameObject);
+			CurrentState.UpdateState(gameObject);
 		}
 	}
 
@@ -31,23 +31,23 @@ public class StateMachine : MonoBehaviour
 	/// <param name="newState"></param>
 	public void ChangeState(IState newState)
 	{
-		if(_currentState == null)
+		if(CurrentState == null)
 		{
-			_currentState = newState;
+			CurrentState = newState;
 			newState.EnterState(gameObject);
 			return;
 		}
 
-		_currentState.ExitState(gameObject);
-		_currentState = newState;
-		_currentState.EnterState(gameObject);
+		CurrentState.ExitState(gameObject);
+		CurrentState = newState;
+		CurrentState.EnterState(gameObject);
 
 		UpdateStateText();
 	}
 
 	private void UpdateStateText()
 	{
-		StateText.text = _currentState.GetStateName();
+		StateText.text = CurrentState.GetStateName();
 	}
 
 	/// <summary>

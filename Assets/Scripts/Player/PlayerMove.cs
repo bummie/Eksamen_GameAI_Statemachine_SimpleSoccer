@@ -86,8 +86,7 @@ public class PlayerMove : MonoBehaviour
 				ShouldMove = true;
 				_timeOutTimeLeft = _timeOutTime;
 			}
-		}
-		
+		}		
 	}
 	
 	/// <summary>
@@ -105,6 +104,21 @@ public class PlayerMove : MonoBehaviour
 		_body.velocity = direction * MoveForce; //_body.AddForce(direction * MoveForce, ForceMode.Impulse);
 
 		RotateTowardsDirection(direction);
+	}
+
+	/// <summary>
+	/// Returns true whether the player has reached targetposition
+	/// </summary>
+	/// <returns></returns>
+	public bool HasReachedDestination()
+	{
+		if(Vector3.Distance(transform.position, TargetPosition) < 3f)
+		{
+			return true;
+		}else
+		{
+			return false;
+		}
 	}
 
 	/// <summary>

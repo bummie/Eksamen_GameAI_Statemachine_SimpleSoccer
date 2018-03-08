@@ -20,6 +20,7 @@ public class GameStates : MonoBehaviour {
 		States.Add("ShootGoal", new ShootGoal());
 		States.Add("SecureGoal", new SecureGoal());
 		States.Add("ResetGame", new ResetGame());
+		States.Add("Ready", new Ready());
 
 	#endregion
 	}

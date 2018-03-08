@@ -31,6 +31,7 @@ public class MoveGoodSpot : IState
         StateMachine stateMachine = player.GetComponent<StateMachine>();
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
         PlayerInfo plyInfo = player.GetComponent<PlayerInfo>();
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();
 
          // If the oposite team has the ball or the ball is free
         if(currentHolder == null || currentHolder.GetComponent<PlayerInfo>().Team != plyInfo.Team)
@@ -48,7 +49,7 @@ public class MoveGoodSpot : IState
         }
 
         // We have found our position!
-        if(Vector3.Distance(player.transform.position, player.GetComponent<PlayerMove>().TargetPosition) < 3f)
+        if(plyMove.HasReachedDestination())
         {
             stateMachine.ChangeState(stateMachine.States["Idle"]);
             return;

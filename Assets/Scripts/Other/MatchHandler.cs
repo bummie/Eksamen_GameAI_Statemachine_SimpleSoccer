@@ -18,7 +18,22 @@ public class MatchHandler : MonoBehaviour
 	
 	void Update () 
 	{
-		//TODO: Start game if all players are in ready state
+		if(AllPlayersReady())
+		{
+			StartGame();
+		}		
+	}
+
+	private bool AllPlayersReady()
+	{
+		foreach(GameObject ply in AllPlayers)
+		{
+			if(ply.GetComponent<StateMachine>().CurrentState.GetStateName() != "Ready")
+			{
+				return false;
+			}
+		}
+		return true;
 	}
 
 	public void GoalScored(StaticData.SoccerTeam team)
@@ -45,9 +60,25 @@ public class MatchHandler : MonoBehaviour
 			if(ply.GetComponent<PlayerInfo>().Position != StaticData.FieldPosition.GOALKEEPER)
 			{
 				ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["ResetGame"]);
+			}else
+			{
+				ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["Ready"]);
 			}
 		}
 		Ball.transform.position = new Vector3(0, 5f, 0);
 		Ball.GetComponent<Rigidbody>().isKinematic = true;
+	}
+
+	/// <summary>
+	/// Start the game
+	/// </summary>
+	private void StartGame()
+	{
+		Ball.GetComponent<Rigidbody>().isKinematic = false;
+
+		foreach(GameObject ply in AllPlayers)
+		{
+			ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["Idle"]);
+		}
 	}
 }
