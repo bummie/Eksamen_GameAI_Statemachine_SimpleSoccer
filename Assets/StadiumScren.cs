@@ -4,13 +4,14 @@ using UnityEngine;
 
 public class StadiumScren : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
+	GameObject Display;
+	Camera Cam;
+	void Start ()
+	{
 		
 	}
 	
-	// Update is called once per frame
-	void Update () {
-		
+	void Update ()
+	{
 	}
 }
