@@ -2,19 +2,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BallController : MonoBehaviour {
-
-	public GameObject Ball;
+public class BallController : MonoBehaviour
+{
+	public Goal OpponentsGoal {get; private set;}
+	public Goal OwnGoal {get; private set;}
+	public GameObject Ball { get; private set; }
 	public Ball BallComponent { get; private set; }
 	public GameObject Feet;
 	void Start () 
 	{
+		Ball = GameObject.FindGameObjectWithTag("Ball");
 		BallComponent = Ball.GetComponent<Ball>();
-	}
-	
-	void Update () 
-	{
-		
+
+		//TODO: Refactor this
+		MatchHandler matchHandler = GameObject.FindGameObjectWithTag("MatchHandler").GetComponent<MatchHandler>();
+		if(GetComponent<PlayerInfo>().Team == StaticData.SoccerTeam.BLUE)
+		{
+			OpponentsGoal = matchHandler.Goal_RED.GetComponent<Goal>();
+			OwnGoal = matchHandler.Goal_BLUE.GetComponent<Goal>();
+		}else
+		{
+			OpponentsGoal = matchHandler.Goal_BLUE.GetComponent<Goal>();
+			OwnGoal = matchHandler.Goal_RED.GetComponent<Goal>();
+		}
 	}
 
 	/// <summary>
@@ -32,6 +42,21 @@ public class BallController : MonoBehaviour {
 	}
 
 	/// <summary>
+	/// Kicks the ball with given force and angle
+	/// </summary>
+	/// <param name="kickForce"></param>
+	public void KickBall(float kickForce, float angle)
+	{
+		// Check if player has the ball
+		if(GameObject.ReferenceEquals(BallComponent.CurrentHolder, gameObject))
+		{
+			BallComponent.DropBall();
+			Vector3 direction = Quaternion.AngleAxis(angle, Vector3.forward) * transform.forward;
+			Ball.GetComponent<Rigidbody>().AddForce(direction * kickForce, ForceMode.Impulse);
+		}
+	}
+
+	/// <summary>
 	/// OnCollisionEnter is called when this collider/rigidbody has begun
 	/// touching another rigidbody/collider.
 	/// </summary>
@@ -40,10 +65,14 @@ public class BallController : MonoBehaviour {
 	{
 		if(other.transform.tag == "Ball")
 		{
-			Ball.GetComponent<Ball>().PickupBall(gameObject);
+			BallComponent.PickupBall(gameObject);
 		}
 	}
 
+	/// <summary>
+	/// Returns the current holder of the ball
+	/// </summary>
+	/// <returns></returns>
 	public GameObject CurrentBallHolder()
 	{
 		return BallComponent.CurrentHolder;

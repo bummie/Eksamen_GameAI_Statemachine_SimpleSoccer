@@ -224,8 +224,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1055630828411052}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.1, y: -0.5101874, z: -1.5565474}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 19.28, y: -0.88, z: -1.5565474}
+  m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_Children:
   - {fileID: 4121489452868822}
   - {fileID: 4598480082907924}
@@ -636,6 +636,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StateText: {fileID: 114770298073254872}
+  StartingState: Idle
 --- !u!114 &114025600353131274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -695,9 +696,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 973f7dad8c9f3c5489eaa60b21b646ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Team: 0
-  Position: 2
-  TeamObject: {fileID: 0}
+  Team: 1
+  Position: 0
 --- !u!114 &114768581416569128
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -733,6 +733,8 @@ MonoBehaviour:
   Shirts:
   - {fileID: 2100000, guid: 7f456a77a6f15ad47811beeb1e29fc94, type: 2}
   - {fileID: 2100000, guid: 9dab7fe773596d745bc97ad1bd1e260b, type: 2}
+  - {fileID: 2100000, guid: 79732ef857b79274c829d4e81b2451bd, type: 2}
+  - {fileID: 2100000, guid: a9f476ddcf9003c4f8feb76db4c1221e, type: 2}
   Head: {fileID: 1950479312746860}
   Body: {fileID: 1965528123804404}
   Hair: {fileID: 1604575797287610}
@@ -781,7 +783,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 91dff558fb072794594bf1f7e36d4bbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Ball: {fileID: 0}
   Feet: {fileID: 1487550452075054}
 --- !u!135 &135930352662277450
 SphereCollider:

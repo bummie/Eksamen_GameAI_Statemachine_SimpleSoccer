@@ -6,6 +6,7 @@ TagManager:
   tags:
   - GameStates
   - Ball
+  - MatchHandler
   layers:
   - Default
   - TransparentFX

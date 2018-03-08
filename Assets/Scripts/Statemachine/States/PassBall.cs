@@ -36,8 +36,9 @@ public class PassBall : IState
 				if(hit.transform.tag.Equals(player.transform.tag))
 				{
 					if(hit.transform.gameObject.GetComponent<PlayerInfo>().Team == player.GetComponent<PlayerInfo>().Team)
-					{
-						player.GetComponent<BallController>().KickBall(10f);
+					{	
+						float kickForce = Random.Range(3f, 8f);
+						player.GetComponent<BallController>().KickBall(kickForce);
             			stateMachine.ChangeState(stateMachine.States["Idle"]);
 						return;
 					}

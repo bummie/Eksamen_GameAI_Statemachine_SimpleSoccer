@@ -9,39 +9,47 @@ public class ChaseBall : IState
 
     public void EnterState(GameObject player)
     {
-        Debug.Log("Entering state ChaseBall");
-		player.GetComponent<PlayerMove>().ShouldMove = true;
-		player.GetComponent<PlayerMove>().TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();
+
+		plyMove.ShouldMove = true;
+		plyMove.TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
     }
     public void UpdateState(GameObject player)
     {   
+        StateMachine stateMachine = player.GetComponent<StateMachine>();
         GameObject currentHolder = player.GetComponent<BallController>().CurrentBallHolder();
+        PlayerMove plyMove = player.GetComponent<PlayerMove>();
+
         if(currentHolder != null)
         {
             // We caught the ball!
             if(GameObject.ReferenceEquals(currentHolder, player))
             {
-                StateMachine stateMachine = player.GetComponent<StateMachine>();
-
-                stateMachine.ChangeState(stateMachine.States["Idle"]);
+                stateMachine.RandomState();
                 return;
             }
 
             // Stop chasing if a teammate has the ball
             if( currentHolder.GetComponent<PlayerInfo>().Team == player.GetComponent<PlayerInfo>().Team)
             {
-                StateMachine stateMachine = player.GetComponent<StateMachine>();
-
                 stateMachine.ChangeState(stateMachine.States["Idle"]);
                 return;
             }
         }
 
-        // Chase the ball!
-        player.GetComponent<PlayerMove>().TargetPosition = player.GetComponent<BallController>().Ball.transform.position;
+        // Chase the ball if closest, if not move to good spot!
+        if(player.GetComponent<PlayerInfo>().TeamInfo.IsPlayerClosestToBall(player))
+        {
+            Vector3 direction = (player.GetComponent<BallController>().Ball.transform.position - player.transform.position).normalized;
+            plyMove.TargetPosition = player.GetComponent<BallController>().Ball.transform.position + direction * 1.2f;
+            plyMove.ShouldMove = true;
+        }else
+        {
+            stateMachine.ChangeState(stateMachine.States["MoveGoodSpot"]);
+            return;
+        }
     }
     public void ExitState(GameObject player)
     {
-        Debug.Log("Exiting Wander");
     }
 }
