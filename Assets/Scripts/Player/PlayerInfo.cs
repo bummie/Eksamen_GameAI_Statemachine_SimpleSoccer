@@ -17,7 +17,6 @@ public class PlayerInfo : MonoBehaviour
 
 		// Change to correct shirtcolor
 		int shirtIndex = Position == StaticData.FieldPosition.GOALKEEPER ? ((int)Team)+2 : (int)Team; 
-		Debug.Log("Team: " + Team.ToString() + " Shirtindex: " + shirtIndex);
 		GetComponent<Cosmetics>().ChangeShirtColor(shirtIndex);	
 	}
 }
