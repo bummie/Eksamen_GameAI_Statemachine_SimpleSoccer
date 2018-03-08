@@ -65,7 +65,6 @@ public class MatchHandler : MonoBehaviour
 				ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["Ready"]);
 			}
 		}
-		Ball.transform.position = new Vector3(0, 5f, 0);
 		Ball.GetComponent<Rigidbody>().isKinematic = true;
 	}
 
@@ -74,11 +73,13 @@ public class MatchHandler : MonoBehaviour
 	/// </summary>
 	private void StartGame()
 	{
+		Ball.transform.position = new Vector3(0, 5f, 0);
 		Ball.GetComponent<Rigidbody>().isKinematic = false;
-
+		
 		foreach(GameObject ply in AllPlayers)
 		{
 			ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["Idle"]);
 		}
+		
 	}
 }
