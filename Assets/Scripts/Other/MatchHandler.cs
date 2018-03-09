@@ -9,10 +9,12 @@ public class MatchHandler : MonoBehaviour
 	public int PointsBlue{get; private set;}
 	public int PointsRed{get; private set;}
 	public GameObject[] AllPlayers{get; private set;}
+	private GameObject[] _allAudience;
 	public GameObject Ball{get; private set;}
 	void Start () 
 	{
 		AllPlayers = GameObject.FindGameObjectsWithTag("Player");
+		_allAudience = GameObject.FindGameObjectsWithTag("Audience");
 		Ball = GameObject.FindGameObjectWithTag("Ball");
 	}
 	
@@ -41,9 +43,11 @@ public class MatchHandler : MonoBehaviour
 		if(team == StaticData.SoccerTeam.BLUE)
 		{
 			PointsRed++;
+			MakeAudienceCheer(true, StaticData.SoccerTeam.RED);
 		}else
 		{
 			PointsBlue++;
+			MakeAudienceCheer(true, StaticData.SoccerTeam.BLUE);
 		}
 
 		ScoreText.text = "BLUE " + PointsBlue + " - " + PointsRed + " RED";
@@ -82,6 +86,22 @@ public class MatchHandler : MonoBehaviour
 		{
 			ply.GetComponent<StateMachine>().ChangeState(ply.GetComponent<StateMachine>().States["Idle"]);
 		}
-		
+
+		MakeAudienceCheer(false, StaticData.SoccerTeam.BOTH);
+	}
+
+	/// <summary>
+	/// Makes the crowd go wild
+	/// </summary>
+	/// <param name="shouldCheer"></param>
+	private void MakeAudienceCheer(bool shouldCheer, StaticData.SoccerTeam team)
+	{
+		foreach(GameObject audience in _allAudience)
+		{	
+			if(audience.GetComponent<Cosmetics>().AudienceTeam == team || team == StaticData.SoccerTeam.BOTH)
+			{
+				audience.GetComponent<AudienceWave>().AudienceCheer = shouldCheer;
+			}
+		}
 	}
 }

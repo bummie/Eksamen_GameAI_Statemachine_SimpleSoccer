@@ -14,6 +14,8 @@ public class Cosmetics : MonoBehaviour
 	public GameObject Body;
 	public GameObject Hair;
 	public GameObject Shirt;
+
+	public StaticData.SoccerTeam AudienceTeam{get; private set;}
 	#endregion
 	void Start () 
 	{
@@ -26,7 +28,8 @@ public class Cosmetics : MonoBehaviour
 		//For Audience
 		if(transform.tag != "Player")
 		{
-			ChangeShirtColor(Random.Range(0, 2));
+			AudienceTeam = Random.Range(0, 2) == 0 ? StaticData.SoccerTeam.BLUE : StaticData.SoccerTeam.RED;
+			ChangeShirtColor((int)AudienceTeam);
 		}
 	}
 
