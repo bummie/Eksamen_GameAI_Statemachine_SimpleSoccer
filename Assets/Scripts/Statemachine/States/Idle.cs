@@ -3,7 +3,7 @@ using UnityEngine;
 public class Idle : IState
 {
 
-   public string GetStateName()
+    public string GetStateName()
     {
         return "Idle";
     }

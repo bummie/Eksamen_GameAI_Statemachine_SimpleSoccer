@@ -25,7 +25,7 @@ public class Cosmetics : MonoBehaviour
 		Head.GetComponent<Renderer>().material = skinTone;
 		Body.GetComponent<Renderer>().material = skinTone;
 
-		//For Audience
+		//Audience picks a random team to cheer for
 		if(transform.tag != "Player")
 		{
 			AudienceTeam = Random.Range(0, 2) == 0 ? StaticData.SoccerTeam.BLUE : StaticData.SoccerTeam.RED;
@@ -33,6 +33,10 @@ public class Cosmetics : MonoBehaviour
 		}
 	}
 
+	/// <summary>
+	/// Changes the players shirt to given shirt in ShirtsArray
+	/// </summary>
+	/// <param name="shirtIndex"></param>
 	public void ChangeShirtColor(int shirtIndex)
 	{
 		Shirt.GetComponent<Renderer>().material = Shirts[shirtIndex];
